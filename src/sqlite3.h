@@ -34,6 +34,8 @@
 #define _SQLITE3_H_
 #include <stdarg.h>     /* Needed for the definition of va_list */
 
+#include "sqlite3_defaults.h"
+
 /*
 ** Make sure we can call this stuff from C++.
 */
@@ -2734,7 +2736,8 @@ SQLITE_API int sqlite3_open(
 );
 SQLITE_API int sqlite3_open16(
   const void *filename,   /* Database filename (UTF-16) */
-  sqlite3 **ppDb          /* OUT: SQLite db handle */
+  sqlite3 **ppDb,          /* OUT: SQLite db handle */
+  int flags              /* Flags */ // MAGOLE TODO: adding file flags
 );
 SQLITE_API int sqlite3_open_v2(
   const char *filename,   /* Database filename (UTF-8) */
