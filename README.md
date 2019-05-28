@@ -1,2 +1,12 @@
 # SafeEditor
-SafeEditor is a single file Win32 application that manages and stores user notes securely.
+SafeEditor is a single file Win32 application that manages and stores user notes securely. It works on Windows Vista, Windows 7, Windows 8, Windows 10, and x86/x64 platforms. The application is portable and can be carried on a USB stick. SafeEditor is free to use.
+
+Unlike other password managers, SafeEditor is a general purpose tool that provides only one text box for the notes leaving the freedom to organize the notes up to the user. Account numbers, pin numbers, passwords, URLs, tokens, receipts and anything else that needs to be password protected can be stored in a single SafeEditor file. The whole file is encrypted and appears to be random data. There’s no way to identify the application that created the file or what protection method was used by just looking at the contents of the file.
+
+SafeEditor uses best security practices to protect the database file contents. It relies on the PBKDF2-SHA256 password based key derivation algorithm to make password bruteforcing harder, strongest CBC-AES256 encryption to safeguard the data and HMAC-SHA256 hashing to detect file tempering.
+
+By default, 100K iterations counter is used for password based key derivation. A cryptographically secure 28-byte random salt is used to derive encryption key which means for each password there are 2^224 possible encryption keys. Files with the same content and encrypted with the same password would appear completely different.
+
+SafeEditor is designed with performance in mind and internally utilizes SQLite database engine to manage files. SQLite code was optimized to take advantage of the SafeEditor encryption algorithms at the database page level. All file reads and writes are transparently encrypted and decrypted on the fly. The application reads and writes files only as much as needed to perform user requested operations. Moreover, each page was chosen to be 4KB in size to align with the default Windows NTFS file system cluster size and the hard disks Advanced Format. Due to this design, SafeEditor is able to handle large database files with no loss in performance.
+
+SafeEditor is very light on system resources. The application is written in plain C language and does not depend on any runtime libraries or frameworks such as MFC, ATL, WTL or STL. This greatly contributes to making SafeEditor a small, self-contained, zero-configuration, single executable file application.
